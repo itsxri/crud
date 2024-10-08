@@ -26,18 +26,20 @@ class Task {
 
 class TaskListScreen extends StatefulWidget {
   @override
-  _TaskListScreenState createState() => _TaskListScreenState();
+  TaskListScreenState createState() => TaskListScreenState();
 }
 
-class _TaskListScreenState extends State<TaskListScreen> {
+class TaskListScreenState extends State<TaskListScreen> {
   final List<Task> _tasks = [];
   final TextEditingController _taskController = TextEditingController();
 
   void _addTask() {
-    setState(() {
-      _tasks.add(Task(name: _taskController.text));
-      _taskController.clear();
-    });
+    if (_taskController.text.isNotEmpty) {
+      setState(() {
+        _tasks.add(Task(name: _taskController.text));
+        _taskController.clear();
+      });
+    }
   }
 
   void _toggleTaskCompletion(int index) {
